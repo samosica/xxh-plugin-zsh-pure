@@ -4,7 +4,8 @@ set -eu
 CDIR="$(cd "$(dirname "$0")" && pwd)"
 readonly CDIR
 readonly build_dir=$CDIR/build
-readonly PURE_VERSION=v1.23.0
+PURE_VERSION=$(cat .pure-version)
+readonly PURE_VERSION
 
 QUIET=""
 
