@@ -4,6 +4,7 @@ set -eu
 CDIR="$(cd "$(dirname "$0")" && pwd)"
 readonly CDIR
 readonly build_dir=$CDIR/build
+# xxh does not copy files that start with a dot (.)
 PURE_VERSION=$(cat "$CDIR/pure-version")
 readonly PURE_VERSION
 
