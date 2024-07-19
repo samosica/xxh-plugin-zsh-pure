@@ -13,18 +13,18 @@ jobs:
       - name: Update Pure
         run: |
           set -x
-          CURRENT_VERSION=$(cat .pure-version)
+          CURRENT_VERSION=$(cat pure-version)
           LATEST_VERSION=$(
             curl -s "https://api.github.com/repos/sindresorhus/pure/releases/latest" | \
             jq -r .tag_name
           )
           if [ "$CURRENT_VERSION" != "$LATEST_VERSION" ]; then
-            echo "$LATEST_VERSION" >.pure-version
+            echo "$LATEST_VERSION" >pure-version
             git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git config --global user.name "github-actions[bot]"
             BRANCH="update-pure-${{ github.run_number }}"
             git checkout -b "$BRANCH"
-            git add .pure-version
+            git add pure-version
             git commit -m "Update Pure to ${LATEST_VERSION}"
             git push origin "$BRANCH"
             gh pr create --base main --head "$BRANCH" --title "Update Pure to ${LATEST_VERSION}" --body ""
